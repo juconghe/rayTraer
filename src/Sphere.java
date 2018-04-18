@@ -17,13 +17,11 @@ public class Sphere extends Shape {
 	public HitRecord hit(Ray ray, float tmin, float tmax) {
 
 		/* YOUR WORK HERE: complete the sphere's intersection routine */
-		Vector3f temp = new Vector3f(center);
-		temp.sub(ray.getOrigin());
 		Vector3f oriToC = ray.getOrigin();
 		oriToC.sub(center);
 
-		float a = temp.lengthSquared();
-		float b = 2 * oriToC.dot(temp);
+		float a = ray.getDirection().lengthSquared();
+		float b = 2 * oriToC.dot(ray.getDirection());
 		float c = oriToC.lengthSquared() - (radius * radius);
 
 		float sqRootValue = (float) Math.sqrt(Math.pow(b, 2) - 4.0 * a * c);
