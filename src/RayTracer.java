@@ -53,8 +53,67 @@ public class RayTracer {
 	{
 		/* YOUR WORK HERE: complete the ray tracing function
 		 * Feel free to make new function as needed. For example, you may want to add a 'shading' function */
-		return new Color3f(0.5f, 0, 0);
+		HitRecord hit = checkIntersection(ray);
+        return rayColor(ray, hit);
 	}
+
+	private Color3f rayColor(Ray ray, HitRecord hit) {
+	    Color3f c = new Color3f();
+	    for (Light l: lights) {
+	        Vector3f lightPos = new Vector3f();
+	        Vector3f lightDir = new Vector3f();
+	        Ray shadow_ray = new Ray(hit.pos, lightDir);
+	        HitRecord shad_hit = checkIntersection(shadow_ray);
+            if (shad_hit == null || shad_hit.t > lightDir.length()) {
+                c.add(evaluateShadingModel(ray, hit, l.intensity, lightDir));
+            }
+        }
+        Color3f totalAmbient = new Color3f(hit.material.Ka.x * ambient.x,
+                                            hit.material.Ka.y * ambient.y,
+                                            hit.material.Ka.z * ambient.z);
+	    c.add(totalAmbient);
+	    return c;
+    }
+
+    private Color3f evaluateShadingModel(Ray cameraRay, HitRecord hit, Color3f lightIntens, Vector3f lightDir) {
+        float maxValue = Math.max(hit.normal.dot(lightDir), 0);
+        Color3f diffuseAmbient = new Color3f(lightIntens.x * hit.material.Kd.x,
+                                            lightIntens.y * hit.material.Kd.y,
+                                            lightIntens.z * hit.material.Kd.z);
+        diffuseAmbient.scale(maxValue);
+
+        Vector3f r = new Vector3f();
+        r.scale(2 * lightDir.dot(hit.normal), hit.normal);
+        r.sub(lightDir);
+
+        float specularMax = Math.max(r.dot(cameraRay.d), 0);
+        specularMax = (float) Math.pow(specularMax, hit.material.phong_exp);
+
+        Vector3f specular = new Vector3f();
+        specular.scale(specularMax, hit.material.Ks);
+
+        Color3f intensSpecular = new Color3f(lightIntens.x * specular.x,
+                                            lightIntens.y * specular.y,
+                                            lightIntens.z * specular.z);
+
+        Color3f finalColor = new Color3f();
+        finalColor.add(diffuseAmbient, intensSpecular);
+        return finalColor;
+    }
+
+    private HitRecord checkIntersection(Ray ray) {
+	    float tmax = 100f;
+	    float tmin = 0f;
+	    HitRecord hit = null;
+	    for (Shape s : shapes) {
+            HitRecord tempHit = s.hit(ray, tmin, tmax);
+            if (tempHit != null) {
+                tmax = tempHit.t;
+                hit = tempHit;
+            }
+        }
+        return hit;
+    }
 
 	// reflect a direction (in) around a given normal
 	/* NOTE: dir is assuming to point AWAY from the hit point
