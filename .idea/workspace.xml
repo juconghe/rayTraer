@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb01109b-8a31-49bf-9d80-dcb3b6faac62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ball_spotlight.png" afterPath="$PROJECT_DIR$/ball_spotlight.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RayTracer.java" afterPath="$PROJECT_DIR$/src/RayTracer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Sphere.java" afterPath="$PROJECT_DIR$/src/Sphere.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Triangle.java" afterPath="$PROJECT_DIR$/src/Triangle.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Sphere.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Sphere.java">
+      <file leaf-file-name="Triangle.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Triangle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="39" column="36" lean-forward="false" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="36" />
+            <state relative-caret-position="590">
+              <caret line="71" column="84" lean-forward="false" selection-start-line="71" selection-start-column="84" selection-end-line="71" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -53,9 +50,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/test.java" />
-        <option value="$PROJECT_DIR$/src/Triangle.java" />
         <option value="$PROJECT_DIR$/src/RayTracer.java" />
         <option value="$PROJECT_DIR$/src/Sphere.java" />
+        <option value="$PROJECT_DIR$/src/Triangle.java" />
       </list>
     </option>
   </component>
@@ -100,6 +97,12 @@
               <item name="Assignment 5" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Assignment 5" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment 5" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="scene" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -140,7 +143,7 @@
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="RayTracer" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="ball_spotlight.scene " />
+      <option name="PROGRAM_PARAMETERS" value="triangle_pointlight.scene " />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -281,12 +284,12 @@
       <workItem from="1523926646684" duration="7819000" />
       <workItem from="1524009787676" duration="4637000" />
       <workItem from="1524095852941" duration="6025000" />
-      <workItem from="1524614521878" duration="4242000" />
+      <workItem from="1524614521878" duration="4999000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22723000" />
+    <option name="totallyTimeSpent" value="23480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1317" y="23" width="1243" height="1417" extended-state="0" />
@@ -395,14 +398,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Triangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Shape.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -467,11 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ball_spotlight.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RayTracer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="355">
@@ -484,10 +474,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ball_spotlight.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Sphere.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="39" column="36" lean-forward="false" selection-start-line="39" selection-start-column="32" selection-end-line="39" selection-end-column="36" />
+        <state relative-caret-position="690">
+          <caret line="47" column="24" lean-forward="true" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangle_pointlight.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Triangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="590">
+          <caret line="71" column="84" lean-forward="false" selection-start-line="71" selection-start-column="84" selection-end-line="71" selection-end-column="84" />
           <folding />
         </state>
       </provider>

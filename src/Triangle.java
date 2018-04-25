@@ -69,7 +69,7 @@ public class Triangle extends Shape {
         float alpha = 1 - beta - gamma;
         float t = mz.determinant() / dOriginal;
 
-        if (beta < 0 || beta > 1 || gamma < 0 || gamma > 1) {
+        if (beta < 0 || beta > 1 || gamma < 0 || gamma > 1 || alpha < 0 || alpha > 1) {
             return null;
         }
 
