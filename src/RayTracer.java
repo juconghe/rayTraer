@@ -15,7 +15,7 @@ public class RayTracer {
 	private int xsample, ysample;	// samples used for super sampling
 	private Color3f background;	// background color
 	private Color3f ambient;	// ambient color
-	private int maxdepth;		// max recursion depth for recursive ray tracing
+	private int maxdepth = 5;		// max recursion depth for recursive ray tracing
 	private float exposure;		// camera exposure for the entire scene
 
 	private Camera camera;
@@ -55,14 +55,17 @@ public class RayTracer {
 		 * Feel free to make new function as needed. For example, you may want to add a 'shading' function */
 		HitRecord hit = checkIntersection(ray);
 		if (hit != null) {
-			return rayColor(ray, hit);
+			return rayColor(ray, hit, depth);
 		} else {
 			return background;
 		}
 	}
 
-	private Color3f rayColor(Ray ray, HitRecord hit) {
-	    Color3f c = new Color3f(0,0,0);
+	private Color3f rayColor(Ray ray, HitRecord hit, int depth) {
+	    Color3f c = new Color3f();
+	    if (depth == maxdepth) {
+	        return c;
+        }
 	    for (Light l: lights) {
 	        Vector3f lightPos = new Vector3f();
 	        Vector3f lightDir = new Vector3f();
@@ -79,6 +82,14 @@ public class RayTracer {
             }
         }
 
+        if (!hit.material.Kr.equals(new Color3f())) {
+	        c.add(reflectRay(ray, hit, depth));
+        }
+
+        if (!hit.material.Kt.equals(new Color3f())) {
+            c.add(refractRay(ray, hit, depth));
+        }
+
 
         Color3f totalAmbient = new Color3f(hit.material.Ka.x * ambient.x,
                                             hit.material.Ka.y * ambient.y,
@@ -87,6 +98,92 @@ public class RayTracer {
 	    return c;
     }
 
+    private Color3f reflectRay(Ray ray, HitRecord hit, int depth) {
+        Color3f c = new Color3f();
+        if (depth == maxdepth) {
+            return c;
+        }
+        Vector3f flippedDir = new Vector3f(ray.getDirection());
+        flippedDir.scale(-1);
+        Vector3f refl_Dir = reflect(flippedDir, hit.normal);
+        Ray refl_ray = new Ray(hit.pos, refl_Dir);
+        HitRecord relf_hit = checkIntersection(refl_ray);
+        if (relf_hit != null) {
+            Color3f rayColor = rayColor(refl_ray, relf_hit, depth + 1);
+            Color3f tempColor = new Color3f(hit.material.Kr.x * rayColor.x,
+                    hit.material.Kr.y * rayColor.y,
+                    hit.material.Kr.z * rayColor.z);
+            c.add(tempColor);
+        } else {
+            Color3f tempColor = new Color3f(hit.material.Kr.x * background.x,
+                    hit.material.Kr.y * background.y,
+                    hit.material.Kr.z * background.z);
+            c.add(tempColor);
+        }
+        return c;
+    }
+
+    private Color3f refractRay(Ray ray, HitRecord hit, int depth) {
+        Color3f c = new Color3f();
+        Vector3f t;
+        float R;
+        if (depth == maxdepth) {
+            return c;
+        }
+        Vector3f flippedNormal = new Vector3f(hit.normal);
+        flippedNormal.scale(-1);
+	    if (ray.getDirection().dot(hit.normal) < 0) {
+            t = refract(ray.getDirection(), hit.normal, 1 / hit.material.ior);
+            R = reflectPercent(hit, ray.getDirection(), hit.normal);
+        } else {
+	        t = refract(ray.getDirection(), flippedNormal, hit.material.ior);
+            R = reflectPercent(hit, ray.getDirection(), flippedNormal);
+        }
+
+        if (t == null) {
+	        return reflectRay(ray, hit, depth + 1);
+        } else {
+	        Ray refr_ray = new Ray(hit.pos, t);
+	        HitRecord refr_hit = checkIntersection(refr_ray);
+	        if (refr_hit != null) {
+                Color3f rayColor = rayColor(refr_ray, refr_hit, depth + 1);
+                Color3f tempColor = new Color3f(hit.material.Kt);
+                tempColor.scale(1 - R);
+
+                Color3f finalColor = new Color3f(tempColor.x * rayColor.x,
+                                                tempColor.y * rayColor.y,
+                                                    tempColor.z * rayColor.z);
+
+                Color3f reflectColor = reflectRay(ray, hit, depth +1);
+                reflectColor.scale(R);
+
+                c.add(reflectColor, finalColor);
+                return  c;
+            } else {
+                Color3f tempColor = new Color3f(hit.material.Kt);
+                tempColor.scale(1 - R);
+
+                Color3f finalColor = new Color3f(tempColor.x * background.x,
+                        tempColor.y * background.y,
+                        tempColor.z * background.z);
+
+                Color3f reflectColor = reflectRay(ray, hit, depth +1);
+                reflectColor.scale(R);
+
+                c.add(reflectColor, finalColor);
+                return  c;
+            }
+        }
+    }
+
+    private float reflectPercent(HitRecord hit ,Vector3f dir, Vector3f normal) {
+        float val1 = (hit.material.ior - 1) * (hit.material.ior - 1);
+        float val2 = (hit.material.ior + 1) * (hit.material.ior + 1);
+        float ratio = val1/ val2;
+        float diff = 1 - ratio;
+        float val3 = (float) (Math.pow((1 + dir.dot(normal)), 5));
+        return  ratio + diff * val3;
+    }
     private Color3f evaluateShadingModel(HitRecord hit, Light light, Ray ray) {
         Color3f color = new Color3f();
         Vector3f lightPos = new Vector3f();
