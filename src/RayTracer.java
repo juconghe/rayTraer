@@ -78,6 +78,8 @@ public class RayTracer {
                 c.add(evaluateShadingModel(hit, l, ray));
             }
         }
+
+
         Color3f totalAmbient = new Color3f(hit.material.Ka.x * ambient.x,
                                             hit.material.Ka.y * ambient.y,
                                             hit.material.Ka.z * ambient.z);
@@ -301,6 +303,25 @@ public class RayTracer {
 			 * Note that you do not need to create a new type of light source.
 			 * Instead, you will convert an area light
 			 * to a collection of point lights and add them all to the 'lights' array */
+            Vector3f center = new Vector3f(scanner.nextFloat(),
+                                            scanner.nextFloat(),
+                                            scanner.nextFloat());
+            float quad_size = scanner.nextFloat();
+            float x =  scanner.nextFloat();
+            float y =  scanner.nextFloat();
+            Color3f color = new Color3f(scanner.nextFloat(),
+                                        scanner.nextFloat(),
+                                        scanner.nextFloat());
+            Color3f intens = new Color3f();		//intensity of each point light in the area light
+            intens.add(color);
+            intens.scale(1/ x / y);
+            for(int i = 0; i < x; i++) {
+                for(int j = 0; j < y; j++) {
+                    Vector3f pos = new Vector3f(center.x - quad_size / 2 + quad_size / x * i, center.y,
+                                                center.z - quad_size / 2 + quad_size / y * j);
+                    lights.add(new PointLight(pos, intens));
+                }
+            }
 
 		} else {
 			System.out.println("undefined light type: " + lighttype);

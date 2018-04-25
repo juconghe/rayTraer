@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb01109b-8a31-49bf-9d80-dcb3b6faac62" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Triangle.java" afterPath="$PROJECT_DIR$/src/Triangle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RayTracer.java" afterPath="$PROJECT_DIR$/src/RayTracer.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,12 +15,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Triangle.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Triangle.java">
+      <file leaf-file-name="RayTracer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/RayTracer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="590">
-              <caret line="71" column="84" lean-forward="false" selection-start-line="71" selection-start-column="84" selection-end-line="71" selection-end-column="84" />
-              <folding />
+            <state relative-caret-position="2836">
+              <caret line="312" column="37" lean-forward="false" selection-start-line="312" selection-start-column="37" selection-end-line="312" selection-end-column="37" />
+              <folding>
+                <element signature="e#717#727#0" expanded="true" />
+                <element signature="e#796#803#0" expanded="true" />
+                <element signature="e#871#878#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -50,9 +55,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/test.java" />
-        <option value="$PROJECT_DIR$/src/RayTracer.java" />
         <option value="$PROJECT_DIR$/src/Sphere.java" />
         <option value="$PROJECT_DIR$/src/Triangle.java" />
+        <option value="$PROJECT_DIR$/src/RayTracer.java" />
       </list>
     </option>
   </component>
@@ -138,8 +143,22 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RayTracer">
-    <configuration name="RayTracer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.RayTracer_ball_area">
+    <configuration name="RayTracer_ball_area" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="RayTracer" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="ball_arealight.scene" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Assignment 5" />
+      <envs />
+    </configuration>
+    <configuration name="RayTracer_triangle" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="RayTracer" />
       <option name="VM_PARAMETERS" value="" />
@@ -260,14 +279,14 @@
       <module name="Assignment 5" />
       <envs />
     </configuration>
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="Application.RayTracer" />
-      <item index="1" class="java.lang.String" itemvalue="Application.test" />
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Application.RayTracer_triangle" />
+      <item index="1" class="java.lang.String" itemvalue="Application.RayTracer_ball_area" />
+      <item index="2" class="java.lang.String" itemvalue="Application.test" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.RayTracer" />
-        <item index="1" class="java.lang.String" itemvalue="Application.test" />
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Application.test" />
       </list>
     </recent_temporary>
   </component>
@@ -284,12 +303,12 @@
       <workItem from="1523926646684" duration="7819000" />
       <workItem from="1524009787676" duration="4637000" />
       <workItem from="1524095852941" duration="6025000" />
-      <workItem from="1524614521878" duration="4999000" />
+      <workItem from="1524614521878" duration="6088000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23480000" />
+    <option name="totallyTimeSpent" value="24569000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1317" y="23" width="1243" height="1417" extended-state="0" />
@@ -303,7 +322,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948422" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32948422" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2448037" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -462,23 +481,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RayTracer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="101" column="27" lean-forward="true" selection-start-line="101" selection-start-column="27" selection-end-line="101" selection-end-column="27" />
-          <folding>
-            <element signature="e#717#727#0" expanded="true" />
-            <element signature="e#796#803#0" expanded="true" />
-            <element signature="e#871#878#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ball_spotlight.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Sphere.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -487,16 +489,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/triangle_pointlight.png">
+    <entry file="file://$PROJECT_DIR$/ball_spotlight.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Triangle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
+        <state relative-caret-position="829">
           <caret line="71" column="84" lean-forward="false" selection-start-line="71" selection-start-column="84" selection-end-line="71" selection-end-column="84" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ball_arealight.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/triangle_pointlight.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RayTracer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2836">
+          <caret line="312" column="37" lean-forward="false" selection-start-line="312" selection-start-column="37" selection-end-line="312" selection-end-column="37" />
+          <folding>
+            <element signature="e#717#727#0" expanded="true" />
+            <element signature="e#796#803#0" expanded="true" />
+            <element signature="e#871#878#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
