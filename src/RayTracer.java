@@ -54,18 +54,28 @@ public class RayTracer {
 		/* YOUR WORK HERE: complete the ray tracing function
 		 * Feel free to make new function as needed. For example, you may want to add a 'shading' function */
 		HitRecord hit = checkIntersection(ray);
-        return rayColor(ray, hit);
+		if (hit != null) {
+			return rayColor(ray, hit);
+		} else {
+			return background;
+		}
 	}
 
 	private Color3f rayColor(Ray ray, HitRecord hit) {
-	    Color3f c = new Color3f();
+	    Color3f c = new Color3f(0,0,0);
 	    for (Light l: lights) {
 	        Vector3f lightPos = new Vector3f();
 	        Vector3f lightDir = new Vector3f();
-	        Ray shadow_ray = new Ray(hit.pos, lightDir);
+			// get the light position and light direction
+	        l.getLight(hit.pos, lightPos, lightDir);
+
+			Vector3f tempLight = new Vector3f(lightPos);
+			tempLight.sub(hit.pos);
+
+            Ray shadow_ray = new Ray(hit.pos, tempLight);
 	        HitRecord shad_hit = checkIntersection(shadow_ray);
-            if (shad_hit == null || shad_hit.t > lightDir.length()) {
-                c.add(evaluateShadingModel(ray, hit, l.intensity, lightDir));
+            if (shad_hit == null || shad_hit.t > tempLight.length()) {
+                c.add(evaluateShadingModel(hit, l, ray));
             }
         }
         Color3f totalAmbient = new Color3f(hit.material.Ka.x * ambient.x,
@@ -75,35 +85,38 @@ public class RayTracer {
 	    return c;
     }
 
-    private Color3f evaluateShadingModel(Ray cameraRay, HitRecord hit, Color3f lightIntens, Vector3f lightDir) {
-        float maxValue = Math.max(hit.normal.dot(lightDir), 0);
-        Color3f diffuseAmbient = new Color3f(lightIntens.x * hit.material.Kd.x,
-                                            lightIntens.y * hit.material.Kd.y,
-                                            lightIntens.z * hit.material.Kd.z);
-        diffuseAmbient.scale(maxValue);
+    private Color3f evaluateShadingModel(HitRecord hit, Light light, Ray ray) {
+        Color3f color = new Color3f();
+        Vector3f lightPos = new Vector3f();
+        Vector3f lightDir = new Vector3f();
+        Color3f lightIntens = light.getLight(hit.pos, lightPos, lightDir);
+        if (lightIntens == null) {
+            return color;
+        }
 
-        Vector3f r = new Vector3f();
-        r.scale(2 * lightDir.dot(hit.normal), hit.normal);
-        r.sub(lightDir);
+        Color3f diffuse = new Color3f(hit.material.Kd.x * lightIntens.x,
+                                    hit.material.Kd.y * lightIntens.y,
+                                    hit.material.Kd.z * lightIntens.z);
+        lightDir.normalize();
+        diffuse.scale(Math.max(hit.normal.dot(lightDir), 0));
+        color.add(diffuse);
 
-        float specularMax = Math.max(r.dot(cameraRay.d), 0);
-        specularMax = (float) Math.pow(specularMax, hit.material.phong_exp);
 
-        Vector3f specular = new Vector3f();
-        specular.scale(specularMax, hit.material.Ks);
-
-        Color3f intensSpecular = new Color3f(lightIntens.x * specular.x,
-                                            lightIntens.y * specular.y,
-                                            lightIntens.z * specular.z);
-
-        Color3f finalColor = new Color3f();
-        finalColor.add(diffuseAmbient, intensSpecular);
-        return finalColor;
+        Color3f specular = new Color3f(hit.material.Ks.x  * lightIntens.x,
+                                        hit.material.Ks.y * lightIntens.y,
+                                        hit.material.Ks.z * lightIntens.z);
+        Vector3f reflected = reflect(lightDir, hit.normal);
+        Vector3f opp = new Vector3f(ray.d);
+        opp.scale(-1);
+        opp.normalize();
+        specular.scale((float) Math.pow(Math.max(reflected.dot(opp), 0), hit.material.phong_exp));
+        color.add(specular);
+        return color;
     }
 
     private HitRecord checkIntersection(Ray ray) {
-	    float tmax = 100f;
-	    float tmin = 0f;
+	    float tmax = Float.MAX_VALUE;
+	    float tmin = 0.0001f;
 	    HitRecord hit = null;
 	    for (Shape s : shapes) {
             HitRecord tempHit = s.hit(ray, tmin, tmax);

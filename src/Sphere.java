@@ -17,33 +17,44 @@ public class Sphere extends Shape {
 	public HitRecord hit(Ray ray, float tmin, float tmax) {
 
 		/* YOUR WORK HERE: complete the sphere's intersection routine */
-		Vector3f oriToC = ray.getOrigin();
+		Vector3f oriToC = new Vector3f(ray.getOrigin());
+        Vector3f direction = new Vector3f(ray.getDirection());
+
 		oriToC.sub(center);
 
-		float a = ray.getDirection().lengthSquared();
-		float b = 2 * oriToC.dot(ray.getDirection());
+		float a = direction.lengthSquared();
+		float b = 2* oriToC.dot(direction);
 		float c = oriToC.lengthSquared() - (radius * radius);
 
-		float sqRootValue = (float) Math.sqrt(Math.pow(b, 2) - 4.0 * a * c);
+		float rootValue = (float) (b * b - 4.0 * a * c);
+		if (rootValue <= 0) {
+		    return null;
+        }
+
+		float sqRootValue = (float) Math.sqrt(rootValue);
 		float t1 = (-b + sqRootValue) / (2.0f * a);
 		float t2 = (-b - sqRootValue) / (2.0f * a);
 
 		float t;
-		if (tmin <= t1 && t1 <= tmax) {
-			t = t1;
-		} else if (tmin <= t2 && t2 <= tmax) {
-			t = t2;
-		} else {
-			return null;
-		}
+        if (tmin<=t1 && t1<=tmax) {
+            if (tmin<=t2 && t2<=tmax && t2<t1){
+                t=t2;
+            }else {
+                t = t1;
+            }
+        } else if (tmin<=t2 && t2<=tmax) {
+            t = t2;
+        } else {
+            return null;
+        }
 
-		Vector3f interPoint = ray.pointAt(t);
-		interPoint.sub(center);
+		Vector3f normal = new Vector3f(ray.pointAt(t));
+		normal.sub(center);
 		HitRecord rec = new HitRecord();
 		rec.pos = ray.pointAt(t);
 		rec.t = t;
 		rec.material = material;
-		rec.normal = interPoint;
+		rec.normal = normal;
 		rec.normal.normalize();
 
 		return rec;
